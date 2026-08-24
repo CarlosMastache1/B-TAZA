@@ -1,0 +1,110 @@
+/* ==========================================
+   1. IMPORTACIÓN DE FUENTES (Google Fonts)
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Inter:wght@300;400;600&display=swap');
+
+/* ==========================================
+   2. VARIABLES Y RESETEO
+   ========================================== */
+:root {
+    --bg-dark: #0d0c0b;     /* Fondo oscuro casi negro */
+    --text-light: #f2efe9;  /* Texto crema (fácil lectura) */
+    --accent-gold: #c89f5d; /* Dorado mate para acentos */
+    
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: var(--font-body);
+    /* Ocultamos la barra de scroll horizontal para evitar desbordes */
+    overflow-x: hidden; 
+}
+
+/* ==========================================
+   3. EL LIENZO 3D (Fijo al fondo)
+   ========================================== */
+#webgl-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;    /*       Lo manda detrás de todo el texto */
+    pointer-events: none; /* Evita que el canvas bloquee los clics */
+}
+
+/* ==========================================
+   4. CONTENEDORES Y SCROLLYTELLING
+   ========================================== */
+.scroll-container {
+    position: relative;
+    z-index: 10; /* El texto va por encima del canvas */
+    background-color: transparent;
+}
+
+/* Cada 'panel' es una sección del alto exacto de la pantalla */
+.panel {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10vw; /* Márgenes laterales responsivos */
+}
+
+/* ==========================================
+   5. ALINEACIONES (Para dar espacio al modelo 3D)
+   ========================================== */
+.content-block {
+    max-width: 500px;
+}
+
+.align-left {
+    align-self: flex-start;
+}
+
+.align-right {
+    align-self: flex-end;
+    text-align: right;
+}
+
+/* ==========================================
+   6. TIPOGRAFÍA Y ESTILOS
+   ========================================== */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    color: var(--accent-gold);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 5rem; }
+h2 { font-size: 3.5rem; }
+h3 { font-size: 2.5rem; }
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    opacity: 0.85; /* Texto ligeramente transparente para que no sea tan brillante */
+}
+
+/* Ajustes especiales para la primera pantalla (Hero) */
+.hero {
+    align-items: center;
+    text-align: center;
+}
+.hero p {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+}

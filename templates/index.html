@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origen | Café de Especialidad</title>
+    
+    <!-- CSS global -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- CSS de Lenis (Scroll Suave) -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
+</head>
+<body>
+
+    <!-- EL LIENZO 3D (Se queda fijo al fondo) -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- EL CONTENIDO (Lo que el usuario scrollea) -->
+    <div class="scroll-container">
+        
+        <!-- Sección 1: Hero -->
+        <section class="panel hero" id="section-1">
+            <div class="content-block">
+                <h1>B-TAZA</h1>
+                <p>Cultivado en las alturas, perfeccionado en la taza.</p>
+            </div>
+        </section>
+
+        <!-- Sección 2: El Grano (Aquí el 3D del grano girará hacia la cámara) -->
+        <section class="panel" id="section-2">
+            <div class="content-block align-right">
+                <h2>Selección Manual</h2>
+                <p>Solo el 5% superior de nuestra cosecha sobrevive a este filtro. Un tueste medio que respeta la altitud.</p>
+            </div>
+        </section>
+
+        <!-- Sección 3: Extracción (Aquí el grano podría deshacerse o alejarse) -->
+        <section class="panel" id="section-3">
+            <div class="content-block align-left">
+                <h2>La Extracción</h2>
+                <p>Notas de cacao oscuro, caramelo y una acidez brillante.</p>
+            </div>
+        </section>
+
+        <!-- Sección 4: Footer falso para dar espacio al scroll -->
+        <section class="panel footer" id="section-4">
+            <div class="content-block">
+                <h3>Descubre la colección</h3>
+                <!-- Aquí iría un botón hacia la tienda -->
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 1. Librería Core 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- 2. Cargador de modelos GLTF (Necesario para importar tu grano.glb) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    
+    <!-- 3. GSAP para animaciones basadas en scroll -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- 4. Lenis para Scroll fluido -->
+    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+    <!-- 5. TU SCRIPT PRINCIPAL (Donde ocurrirá la magia) -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
