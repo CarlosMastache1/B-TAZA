@@ -8,3 +8,6 @@ def sobre_nosotros(request):
 
 def historia(request):
     return render(request, 'historia.html')
+
+def precios(request):
+    return render(request, 'precios.html')

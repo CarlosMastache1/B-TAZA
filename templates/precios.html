@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mercado Internacional - B-Taza{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-header">
+    <div class="dashboard-title-wrapper">
+        <span class="dashboard-kicker">Mercado en Tiempo Real</span>
+        <h1 class="dashboard-title">Precios Internacionales del Café</h1>
+        <p class="dashboard-subtitle">Futuros US Coffee C - Cotización convertida a Pesos Mexicanos (MXN) por Kilogramo</p>
+        
+        <!-- LEYENDA DE PRECIO ACTUAL -->
+       <!-- LEYENDA DE PRECIO ACTUAL -->
+        <div class="current-price-legend">
+            <span class="legend-label">Precio al momento (Gráfico Principal)</span>
+            <!-- Tarjeta de diseño nativo elegante -->
+            <div class="price-card-native">
+                <span class="price-value" id="live-price-display">124.64 MXN</span>
+                <span class="price-unit">por Kilogramo</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Contenedor del Gráfico de TradingView -->
+<section class="dashboard-container">
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+        <div id="tradingview_coffee"></div>
+        <div class="tradingview-widget-copyright">
+            <a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank">
+                <span class="blue-text">Gráfico proporcionado por TradingView</span>
+            </a>
+        </div>
+    </div>
+    <!-- TradingView Widget END -->
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+    new TradingView.widget(
+    {
+        "width": "100%",
+        "height": "100%",
+        "symbol": "CAPITALCOM:COFFEE*FX_IDC:USDMXN*2.20462", 
+        "interval": "D", 
+        "timezone": "America/Mexico_City",
+        "theme": "dark", 
+        "style": "1", 
+        "locale": "en", // <--- 1. Cambiado a 'en' para forzar el punto decimal
+        "enable_publishing": false,
+        "allow_symbol_change": false,
+        "backgroundColor": "#0d0c0b", 
+        "gridColor": "rgba(242, 239, 233, 0.06)", 
+        "hide_top_toolbar": false,
+        "hide_legend": true, // <--- 2. Oculta la leyenda con la fórmula matemática del gráfico
+        "save_image": false,
+        "withdateranges": true,
+        "container_id": "tradingview_coffee"
+    }
+    );
+});
+</script>
+{% endblock %}

@@ -25,5 +25,6 @@ urlpatterns = [
     path('', views.landing_page, name='home'),
     path('sobre-nosotros/', views.sobre_nosotros, name='sobre_nosotros'),
     path('historia/', views.historia, name='historia'),
+    path('mercado/', views.precios, name='precios'),
     
 ]
