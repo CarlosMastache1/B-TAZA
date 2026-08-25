@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}B-Taza{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
+
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <nav class="navbar-premium">
+        <div class="nav-logo">B-Taza</div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="{% url 'sobre_nosotros' %}">Sobre Nosotros</a></li>
+            <li><a href="{% url 'historia' %}">Historia</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#contacto">Precios Internacionales del Cafe</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    {% block extra_scripts %}{% endblock %}
+
+</body>
+</html>

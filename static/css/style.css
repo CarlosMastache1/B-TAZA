@@ -108,3 +108,274 @@ p {
     letter-spacing: 3px;
     font-size: 0.9rem;
 }
+
+.navbar-premium {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    z-index: 100;
+    
+    background: rgba(13, 12, 11, 0.4); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(242, 239, 233, 0.05);
+}
+
+.nav-logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-gold);
+}
+
+
+/* ==========================================
+   PÁGINA: SOBRE NOSOTROS
+   ========================================== */
+
+.about-hero {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStVzyqou9YgTU6YsrWB4xsjY6HzQVI5Lj8TIAaZzpJyhewaF6Wx1DV1wfJ&s=10') center/cover no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(13,12,11,0.3) 0%, rgba(13,12,11,1) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+/* Sección de Historia (Texto + Imagen) */
+.about-history {
+    padding: 100px 5vw;
+    background-color: var(--bg-dark);
+}
+
+.history-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.history-text h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--accent-gold);
+    margin-bottom: 20px;
+}
+
+.history-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #cccccc;
+}
+
+.history-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    filter: grayscale(20%) contrast(110%); 
+}
+
+
+.about-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 50px 5vw 120px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.pillar h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--accent-gold);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.pillar p {
+    line-height: 1.6;
+    color: #aaaaaa;
+}
+
+
+@media (max-width: 768px) {
+    .history-grid { grid-template-columns: 1fr; }
+    .about-pillars { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2.5rem; }
+}
+
+
+/* ==========================================
+   PÁGINA: NUESTRA HISTORIA
+   ========================================== */
+
+/* Hero Tipográfico */
+.story-hero {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: 0 10vw;
+    background-color: var(--bg-dark);
+    margin-top: 80px; /* Para librar el navbar */
+}
+
+.story-kicker {
+    font-family: var(--font-body);
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.story-title {
+    font-family: var(--font-heading);
+    font-size: 5.5rem;
+    line-height: 1.1;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Capítulos */
+.story-chapters {
+    background-color: var(--bg-dark);
+    padding-bottom: 150px;
+}
+
+.chapter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto 150px auto;
+    padding: 0 5vw;
+    gap: 80px;
+}
+
+
+.chapter-row.reverse {
+    flex-direction: row-reverse;
+}
+
+
+.chapter-text {
+    flex: 1;
+    max-width: 500px;
+}
+
+.chapter-number {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: rgba(200, 159, 93, 0.3); 
+    display: block;
+    margin-bottom: 10px;
+}
+
+.chapter-text h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.chapter-text p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #b3b3b3;
+    margin-bottom: 25px;
+}
+
+
+.chapter-visual {
+    flex: 1;
+    width: 100%;
+}
+
+.parallax-wrapper {
+    width: 100%;
+    height: 500px; 
+    overflow: hidden; 
+    border-radius: 4px;
+}
+
+.parallax-img {
+    width: 100%;
+    height: 130%; 
+    object-fit: cover;
+    transform: translateY(-15%); 
+    filter: brightness(0.85) contrast(1.1); 
+}
+
+
+@media (max-width: 992px) {
+    .chapter-row, .chapter-row.reverse {
+        flex-direction: column;
+        gap: 40px;
+        margin-bottom: 100px;
+    }
+    .story-title { font-size: 3.5rem; }
+    .parallax-wrapper { height: 450px; }
+}

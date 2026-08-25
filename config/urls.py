@@ -23,4 +23,7 @@ from config import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.landing_page, name='home'),
+    path('sobre-nosotros/', views.sobre_nosotros, name='sobre_nosotros'),
+    path('historia/', views.historia, name='historia'),
+    
 ]

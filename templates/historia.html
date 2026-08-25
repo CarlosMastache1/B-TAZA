@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nuestra Historia - B-Taza{% endblock %}
+
+{% block content %}
+<!-- Encabezado Editorial -->
+<section class="story-hero">
+    <div class="story-hero-content">
+        <span class="story-kicker">El Legado</span>
+        <h1 class="story-title">Raíces en la<br>Sierra Norte</h1>
+    </div>
+</section>
+
+<!-- Contenedor Principal de la Historia -->
+<section class="story-chapters">
+    
+    <!-- Capítulo 1 -->
+    <div class="chapter-row">
+        <div class="chapter-text">
+            <span class="chapter-number">01.</span>
+            <h2>La Tierra de las Nubes</h2>
+            <p>En lo profundo de la Sierra Norte de Oaxaca, San Melchor Betaza no es solo un punto en el mapa; es un ecosistema vivo donde la niebla abraza las montañas cada mañana. Aquí, a más de 1,200 metros de altitud, el clima frío y la humedad constante crean el santuario perfecto para el cultivo del café de especialidad.</p>
+            <p>Nuestra historia no comienza en una oficina, sino en los suelos volcánicos y ricos en minerales que nuestros abuelos comenzaron a trabajar a mano. Entendieron desde el primer día que la montaña no se domina, se escucha.</p>
+        </div>
+        <div class="chapter-visual">
+            <div class="parallax-wrapper">
+                <img src="https://www.oaxaca.gob.mx/comunicacion/wp-content/uploads/sites/28/2025/06/5884392e-dab3-4858-b6db-e41eaac3161e.jpeg" class="parallax-img" alt="Paisaje de la Sierra">
+            </div>
+        </div>
+    </div>
+
+    <!-- Capítulo 2 (Invertido) -->
+    <div class="chapter-row reverse">
+        <div class="chapter-text">
+            <span class="chapter-number">02.</span>
+            <h2>El Arte de la Paciencia</h2>
+            <p>A diferencia de los cultivos industriales, el café en Betaza crece bajo la sombra protectora del bosque mesófilo. Este proceso exige paciencia absoluta. Las cerezas maduran lentamente, permitiendo que los azúcares naturales se concentren en el grano, desarrollando esos perfiles complejos y achocolatados que nos definen.</p>
+            <p>Cada recolección es un acto de precisión. Nuestras familias seleccionan exclusivamente las cerezas en su punto exacto de maduración, un conocimiento que se ha transmitido de generación en generación mediante la observación y el respeto por los ciclos naturales.</p>
+        </div>
+        <div class="chapter-visual">
+            <div class="parallax-wrapper">
+                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/eluniversal/3HC2O52P3RFF3D4KSEYJS56WFM.jpg" class="parallax-img" alt="Manos trabajando el café">
+            </div>
+        </div>
+    </div>
+
+    <!-- Capítulo 3 -->
+    <div class="chapter-row">
+        <div class="chapter-text">
+            <span class="chapter-number">03.</span>
+            <h2>El Nacimiento de B-Taza</h2>
+            <p>B-Taza nace como un puente directo entre el productor zapoteco y la taza final. Decidimos eliminar a los intermediarios que durante décadas marginaron el esfuerzo local, para llevar la pureza de San Melchor Betaza directamente a quienes valoran el verdadero café de especialidad.</p>
+            <p>Hoy, cada bolsa que tostamos es un tributo a nuestras raíces. Es la culminación de un proceso artesanal que honra la biodiversidad de Oaxaca y garantiza un comercio justo, asegurando que la herencia cafetalera de nuestra sierra perdure por muchas generaciones más.</p>
+        </div>
+        <div class="chapter-visual">
+            <div class="parallax-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4-MwydR8QQlO5lE5YJi1R29yMa_tvOFNc4GD8wH8-1iZmCs2KRXx5mie-&s=10" class="parallax-img" alt="Taza de café premium">
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Lenis Setup
+    const lenis = new Lenis({ duration: 1.2 });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time)=>{ lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0, 0);
+
+    // Efecto Parallax en las imágenes (Scrubbing)
+    gsap.utils.toArray('.parallax-wrapper').forEach(wrapper => {
+        const img = wrapper.querySelector('.parallax-img');
+        
+        gsap.to(img, {
+            y: "20%", // La imagen se desliza hacia abajo dentro de su contenedor
+            ease: "none",
+            scrollTrigger: {
+                trigger: wrapper,
+                start: "top bottom", 
+                end: "bottom top",
+                scrub: true // Esto sincroniza la animación perfectamente con la rueda del ratón
+            }
+        });
+    });
+
+    // Aparición suave de los textos desde los lados
+    gsap.utils.toArray('.chapter-row').forEach(row => {
+        const textBlock = row.querySelector('.chapter-text');
+        
+        // Si es la fila invertida, entra por la izquierda, si no, por la derecha
+        const xOffset = row.classList.contains('reverse') ? -50 : 50;
+
+        gsap.fromTo(textBlock, 
+            { opacity: 0, x: xOffset },
+            { 
+                opacity: 1, 
+                x: 0, 
+                duration: 1.5, 
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: row,
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
+});
+</script>
+{% endblock %}

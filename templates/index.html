@@ -1,22 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Origen | Café de Especialidad</title>
-    
-    <!-- CSS global -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- CSS de Lenis (Scroll Suave) -->
-    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
-</head>
-<body>
 
-    <!-- EL LIENZO 3D (Se queda fijo al fondo) -->
+{% block title %}Inicio - B-Taza{% endblock %}
+
+{% block content %}
     <canvas id="webgl-canvas"></canvas>
 
-    <!-- EL CONTENIDO (Lo que el usuario scrollea) -->
     <div class="scroll-container">
         
         <!-- Sección 1: Hero -->
@@ -52,7 +41,9 @@
         </section>
 
     </div>
+{% endblock %}
 
+{% block extra_scripts %}
     <!-- 1. Librería Core 3D -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- 2. Cargador de modelos GLTF (Necesario para importar tu grano.glb) -->
@@ -67,6 +58,4 @@
 
     <!-- 5. TU SCRIPT PRINCIPAL (Donde ocurrirá la magia) -->
     <script src="{% static 'js/main.js' %}"></script>
-
-</body>
-</html>
+{% endblock %}
