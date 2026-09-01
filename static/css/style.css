@@ -137,7 +137,7 @@ p {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 40px;
+    gap: 35px;
     margin: 0;
     padding: 0;
 }
@@ -502,4 +502,457 @@ p {
     color: #aaaaaa;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+
+/* Cuadrícula para las tarjetas superiores */
+.prices-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 35px;
+    flex-wrap: wrap; /* Permite que bajen si no caben */
+}
+
+/* Cuadrícula para los gráficos */
+.charts-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas del mismo ancho */
+    gap: 40px;
+    padding: 0 5vw 100px 5vw;
+    background-color: var(--bg-dark);
+}
+
+.chart-wrapper {
+    height: 65vh; /* Altura de las gráficas */
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-title {
+    font-family: var(--font-heading);
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Responsive para celulares y tablets */
+@media (max-width: 1024px) {
+    .charts-grid-container {
+        grid-template-columns: 1fr; /* Una sola columna, apiladas verticalmente */
+        gap: 60px;
+    }
+}
+
+
+/* --- CONFIGURACIÓN BASE DEL BOTÓN (Oculto en PC) --- */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 100; /* Asegura que el botón esté encima del menú abierto */
+}
+
+.hamburger-line {
+    display: block;
+    width: 28px;
+    height: 2px;
+    margin: 6px auto;
+    background-color: var(--accent-gold, #c89f5d); /* Usa tu variable dorada */
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; 
+        width: 75%;
+        height: 100vh;
+        background-color: #0d0c0b; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        transition: right 0.4s ease;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+        z-index: 99;
+    }
+
+  
+    .nav-links.active {
+        right: 0;
+    }
+
+   
+    .mobile-menu-btn.active .hamburger-line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-menu-btn.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+    .mobile-menu-btn.active .hamburger-line:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+
+/* --- CABECERA DE PRODUCTOS --- */
+.products-header {
+    text-align: center;
+    margin-top: 120px; /* Compensa el navbar fijo */
+    margin-bottom: 50px;
+    padding: 0 5%;
+}
+
+/* --- CONTENEDOR DE TARJETAS --- */
+.products-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 0 5% 100px 5%;
+    flex-wrap: wrap; /* Para que bajen en celulares */
+}
+
+/* --- DISEÑO DE LA TARJETA --- */
+.product-card {
+    background: rgba(20, 19, 18, 0.6);
+    border: 1px solid rgba(242, 239, 233, 0.08);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 450px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    /* Efecto de cristal */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Efecto al pasar el mouse por la tarjeta */
+.product-card:hover {
+    transform: translateY(-10px); /* Flota hacia arriba */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(200, 159, 93, 0.15); /* Brillo dorado */
+    border-color: rgba(200, 159, 93, 0.4);
+}
+
+/* --- GALERÍA DE IMÁGENES --- */
+.product-gallery {
+    padding: 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+}
+
+.main-image {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .main-image img {
+    transform: scale(1.05); /* Ligero zoom a la imagen principal al pasar el mouse */
+}
+
+.thumbnail-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.thumbnail-row .thumb {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-row .thumb:hover {
+    opacity: 1;
+}
+
+.thumbnail-row .thumb.active {
+    opacity: 1;
+    border-color: var(--accent-gold, #c89f5d);
+}
+
+/* --- INFORMACIÓN DEL PRODUCTO --- */
+.product-info {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-badges {
+    margin-bottom: 15px;
+}
+
+.badge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.badge.gold {
+    background: rgba(200, 159, 93, 0.2);
+    color: var(--accent-gold, #c89f5d);
+    border: 1px solid rgba(200, 159, 93, 0.4);
+}
+
+.product-name {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: #fff;
+    margin: 0 0 5px 0;
+}
+
+.product-weight {
+    color: var(--accent-gold, #c89f5d);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-desc {
+    color: #aaaaaa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.product-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.product-features li {
+    color: #cccccc;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.feature-icon {
+    margin-right: 10px;
+    font-style: normal;
+}
+
+/* --- FOOTER: PRECIO Y BOTÓN --- */
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Empuja esto al fondo si la tarjeta crece */
+    padding-top: 20px;
+    border-top: 1px solid rgba(242, 239, 233, 0.08);
+}
+
+.product-price {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: #fff;
+}
+
+.btn-gold {
+    background-color: var(--accent-gold, #c89f5d);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-gold:hover {
+    background-color: #dcb371;
+    transform: scale(1.05);
+}
+
+/* --- ANIMACIONES DE SCROLL (REVEAL) --- */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(40px); /* Empieza un poco más abajo */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pequeño retraso para que la segunda tarjeta aparezca un instante después que la primera */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.3s; }
+
+
+/* --- SECCIÓN CONTACTO (Hero Full Screen) --- */
+.contact-hero {
+    position: relative;
+    min-height: 100vh;
+    /* Reemplaza la URL por una foto tuya usando {% static 'img/tu_foto.jpg' %} en línea si prefieres, o déjalo en CSS */
+    background-image: url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Le da un efecto parallax muy elegante */
+    display: flex;
+    align-items: center;
+    padding: 120px 5% 50px 5%; /* Espacio superior para evitar que el navbar tape el texto */
+}
+
+/* Gradiente que oscurece el lado izquierdo para resaltar el texto */
+.contact-hero .overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, rgba(13,12,11,0.85) 0%, rgba(13,12,11,0.3) 100%);
+    z-index: 1;
+}
+
+.contact-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Empuja el formulario hacia la parte inferior */
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* --- TEXTO PRINCIPAL --- */
+.contact-text {
+    max-width: 600px;
+    margin-bottom: 40px;
+}
+
+.contact-text h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.contact-text p {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: rgba(242, 239, 233, 0.85);
+    line-height: 1.6;
+}
+
+/* --- FORMULARIO TIPO WIDGET --- */
+.contact-form-wrapper {
+    background-color: #ffffff; /* Fondo blanco estilo widget */
+    border-radius: 8px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.contact-form-header {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 15px 20px;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-form {
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: #444;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    background-color: #f9f9f9;
+    color: #000;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-gold, #c89f5d);
+    background-color: #fff;
+}
+
+.form-submit {
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 4px;
+}
+
+/* --- ADAPTACIÓN A CELULARES --- */
+@media (max-width: 900px) {
+    .contact-hero {
+        background-position: left center;
+    }
+    
+    .contact-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .contact-text h1 {
+        font-size: 2.5rem;
+    }
 }

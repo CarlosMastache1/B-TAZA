@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contacto - B-Taza{% endblock %}
+
+{% block content %}
+<section class="contact-hero">
+    <!-- Capa oscura para asegurar que el texto sea legible sobre la foto -->
+    <div class="overlay"></div>
+
+    <div class="contact-container">
+        <!-- Texto a la izquierda -->
+        <div class="contact-text">
+            <h1>Para los amantes del buen café</h1>
+            <p>Descubre nuestra guía de granos de especialidad. Déjanos tus datos si estás interesado en adquirir nuestras presentaciones o tienes dudas sobre tu pedido.</p>
+        </div>
+
+        <!-- Formulario estilo widget a la derecha -->
+        <div class="contact-form-wrapper">
+            <div class="contact-form-header">
+                <span>Déjanos un mensaje</span>
+            </div>
+            <!-- Asegúrate de tener la vista 'contacto' en tu urls.py -->
+            <form action="" method="POST" class="contact-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Tu nombre</label>
+                    <input type="text" id="name" name="name" required placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" required placeholder="correo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="interest">¿Qué producto te interesa?</label>
+                    <select id="interest" name="interest">
+                        <option value="origen">B-Taza Origen (250g)</option>
+                        <option value="reserva">B-Taza Reserva (500g)</option>
+                        <option value="mayorista">Venta al por mayor</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">¿Cómo podemos ayudarte?</label>
+                    <textarea id="message" name="message" rows="3" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                </div>
+                <button type="submit" class="btn-gold form-submit">Enviar Mensaje</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

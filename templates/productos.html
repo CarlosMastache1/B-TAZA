@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nuestros Productos - B-Taza{% endblock %}
+
+{% block content %}
+<section class="products-header reveal-on-scroll">
+    <span class="dashboard-kicker">Cosecha de Altura</span>
+    <h1 class="dashboard-title">Nuestra Selección</h1>
+    <p class="dashboard-subtitle">Café de especialidad tostado a la perfección. Elige tu presentación ideal.</p>
+</section>
+
+<section class="products-container">
+    
+    <!-- TARJETA 1: 250g (Cuarto de Kilo) -->
+    <div class="product-card reveal-on-scroll delay-1">
+        <div class="product-gallery">
+            <div class="main-image">
+                <img id="main-img-1" src="{% static 'img/cafe2.jpeg' %}" alt="B-Taza 250g">
+            </div>
+            <div class="thumbnail-row">
+                <img src="{% static 'img/cafe1.jpeg' %}" class="thumb active" onclick="changeImage('main-img-1', this)">
+                <img src="{% static 'img/cafe2.jpeg' %}" class="thumb active" onclick="changeImage('main-img-1', this)">
+
+            </div>
+        </div>
+        
+        <div class="product-info">
+            <div class="product-badges">
+                <span class="badge">Edición Degustación</span>
+            </div>
+            <h2 class="product-name">B-Taza Origen</h2>
+            <p class="product-weight">250g / Cuarto de Kilo</p>
+            
+            <p class="product-desc">Ideal para descubrir nuestro perfil de sabor. Un tueste medio que resalta las notas dulces y afrutadas sin perder cuerpo.</p>
+            
+            <ul class="product-features">
+                <li><strong>Notas:</strong> Chocolate oscuro y frutos rojos.</li>
+                <li><strong>Altura:</strong> 1,200 m.s.n.m.</li>
+                <li><strong>Tueste:</strong> Medio.</li>
+            </ul>
+
+        </div>
+    </div>
+
+    <!-- TARJETA 2: 500g (Medio Kilo) -->
+    <div class="product-card reveal-on-scroll delay-2">
+        <div class="product-gallery">
+            <div class="main-image">
+                <img id="main-img-2" src="{% static 'img/cafe2.jpeg' %}" alt="B-Taza 500g">
+            </div>
+            <div class="thumbnail-row">
+
+                <img src="{% static 'img/cafe3.jpeg' %}" class="thumb active" onclick="changeImage('main-img-2', this)">
+                <img src="{% static 'img/cafe4.jpeg' %}" class="thumb active" onclick="changeImage('main-img-2', this)">
+
+
+            </div>
+        </div>
+        
+        <div class="product-info">
+            <div class="product-badges">
+                <span class="badge gold">Más Vendido</span>
+            </div>
+            <h2 class="product-name">B-Taza Reserva</h2>
+            <p class="product-weight">500g / Medio Kilo</p>
+            
+            <p class="product-desc">La presentación perfecta para los amantes del café diario. Granos seleccionados a mano para garantizar una taza perfecta y balanceada.</p>
+            
+            <ul class="product-features">
+                <li><strong>Notas:</strong> Caramelo, vainilla y nuez tostada.</li>
+                <li><strong>Altura:</strong> 1,400 m.s.n.m.</li>
+                <li><strong>Tueste:</strong> Medio-Oscuro.</li>
+            </ul>
+            
+
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    function changeImage(mainImageId, thumbElement) {
+        document.getElementById(mainImageId).src = thumbElement.src;
+        
+        let thumbs = thumbElement.parentElement.getElementsByClassName('thumb');
+        for(let i = 0; i < thumbs.length; i++) {
+            thumbs[i].classList.remove('active');
+        }
+        
+        thumbElement.classList.add('active');
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 }); // Se activa cuando el 10% del elemento es visible
+
+        document.querySelectorAll('.reveal-on-scroll').forEach((element) => {
+            observer.observe(element);
+        });
+    });
+</script>
+{% endblock %}

@@ -4,66 +4,106 @@
 {% block title %}Mercado Internacional - B-Taza{% endblock %}
 
 {% block content %}
-
 <section class="dashboard-header">
     <div class="dashboard-title-wrapper">
-        <span class="dashboard-kicker">Mercado en Tiempo Real</span>
-        <h1 class="dashboard-title">Precios Internacionales del Café</h1>
-        <p class="dashboard-subtitle">Futuros US Coffee C - Cotización convertida a Pesos Mexicanos (MXN) por Kilogramo</p>
+        <span class="dashboard-kicker">Mercados en Tiempo Real</span>
+        <h1 class="dashboard-title">Cotizaciones del Café</h1>
+        <p class="dashboard-subtitle">Conversión en vivo a Pesos Mexicanos (MXN) por Kilogramo</p>
         
-        <!-- LEYENDA DE PRECIO ACTUAL -->
-       <!-- LEYENDA DE PRECIO ACTUAL -->
-        <div class="current-price-legend">
-            <span class="legend-label">Precio al momento (Gráfico Principal)</span>
-            <!-- Tarjeta de diseño nativo elegante -->
+        <!-- TARJETAS DE PRECIOS DINÁMICOS -->
+        <div class="prices-grid">
             <div class="price-card-native">
-                <span class="price-value" id="live-price-display">124.64 MXN</span>
+                <span class="legend-label">Arábica (Pergamino)</span>
+                <span class="price-value">{{ precio_arabica }} MXN</span>
                 <span class="price-unit">por Kilogramo</span>
             </div>
-        </div>
-
+  
+      </div>
     </div>
 </section>
-<!-- Contenedor del Gráfico de TradingView -->
-<section class="dashboard-container">
-    <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container">
-        <div id="tradingview_coffee"></div>
-        <div class="tradingview-widget-copyright">
-            <a href="https://es.tradingview.com/" rel="noopener nofollow" target="_blank">
-                <span class="blue-text">Gráfico proporcionado por TradingView</span>
-            </a>
-        </div>
+
+
+<section class="dashboard-container" style="margin-top: 40px;">
+    <div class="chart-wrapper">
+        <h3 class="chart-title">Futuros Arábica (Referencia Pergamino)</h3>
+        <div class="tradingview-widget-container" id="tradingview_arabica"></div>
     </div>
-    <!-- TradingView Widget END -->
 </section>
 {% endblock %}
 
+
 {% block extra_scripts %}
+<!-- 1. Script TradingView (Arábica) -->
 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function() {
-    new TradingView.widget(
-    {
-        "width": "100%",
-        "height": "100%",
+    new TradingView.widget({
+        "width": "100%", "height": "100%",
         "symbol": "CAPITALCOM:COFFEE*FX_IDC:USDMXN*2.20462", 
-        "interval": "D", 
-        "timezone": "America/Mexico_City",
-        "theme": "dark", 
-        "style": "1", 
-        "locale": "en", // <--- 1. Cambiado a 'en' para forzar el punto decimal
-        "enable_publishing": false,
-        "allow_symbol_change": false,
-        "backgroundColor": "#0d0c0b", 
-        "gridColor": "rgba(242, 239, 233, 0.06)", 
-        "hide_top_toolbar": false,
-        "hide_legend": true, // <--- 2. Oculta la leyenda con la fórmula matemática del gráfico
-        "save_image": false,
-        "withdateranges": true,
-        "container_id": "tradingview_coffee"
-    }
-    );
+        "interval": "D", "timezone": "America/Mexico_City", "theme": "dark", "style": "1", 
+        "locale": "en", "enable_publishing": false, "allow_symbol_change": false,
+        "backgroundColor": "#0d0c0b", "gridColor": "rgba(242, 239, 233, 0.06)", 
+        "hide_top_toolbar": false, "hide_legend": true, "save_image": false, "withdateranges": true,
+        "container_id": "tradingview_arabica"
+    });
+});
+</script>
+
+<!-- 2. Script Chart.js (Robusta nativo) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Recibimos los datos exactos desde Python/Django de forma segura
+    const fechas = JSON.parse('{{ fechas_robusta|escapejs }}');
+    const precios = JSON.parse('{{ precios_robusta|escapejs }}');
+
+    const ctx = document.getElementById('robustaChart').getContext('2d');
+    
+    // Creamos un gradiente verde estilo financiero para la línea
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(74, 222, 128, 0.5)'); // Verde neón transparente
+    gradient.addColorStop(1, 'rgba(74, 222, 128, 0.0)');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: fechas,
+            datasets: [{
+                label: 'Precio Robusta (MXN)',
+                data: precios,
+                borderColor: '#4ade80', // Verde financiero
+                borderWidth: 2,
+                backgroundColor: gradient,
+                fill: true,
+                pointRadius: 0, // Ocultar los puntos para que se vea como línea de trading
+                tension: 0.1 // Curva sutil
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    titleColor: '#c89f5d',
+                    bodyColor: '#ffffff'
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false, color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#888', maxTicksLimit: 6 } // No amontonar fechas
+                },
+                y: {
+                    grid: { color: 'rgba(242, 239, 233, 0.06)' },
+                    ticks: { color: '#888' },
+                    position: 'right' 
+            }
+        }
+    });
 });
 </script>
 {% endblock %}

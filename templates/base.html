@@ -15,21 +15,52 @@
 <body>
 
     <nav class="navbar-premium">
-        <div class="nav-logo">B-Taza</div>
-        <ul class="nav-links">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="{% url 'sobre_nosotros' %}">Sobre Nosotros</a></li>
-            <li><a href="{% url 'historia' %}">Historia</a></li>
-            <li><a href="#productos">Productos</a></li>
-            <li><a href="{% url 'precios' %}">Precios Internacionales del Cafe</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
-    </nav>
+    <div class="nav-logo">
+        B-Taza
+    </div>
+
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+        <li><a href="/">INICIO</a></li>
+        <li><a href="{% url 'sobre_nosotros' %}">SOBRE NOSOTROS</a></li>
+        <li><a href="{% url 'historia' %}">HISTORIA</a></li>
+        <li><a href="{% url 'productos' %}">PRODUCTOS</a></li>
+        <li><a href="{% url 'precios' %}">PRECIO INTERNACIONAL</a></li>
+        <li><a href="{% url 'contacto' %}">CONTACTO</a></li>
+    </ul>
+</nav>
 
     {% block content %}
     {% endblock %}
 
     {% block extra_scripts %}{% endblock %}
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+
+    if(menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.classList.toggle('active');
+        });
+
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.classList.remove('active');
+            });
+        });
+    }
+});
+</script>
 
 </body>
 </html>
