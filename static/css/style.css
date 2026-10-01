@@ -11,6 +11,7 @@
     --text-light: #f2efe9;  /* Texto crema (fácil lectura) */
     --accent-gold: #c89f5d; /* Dorado mate para acentos */
     --accent-brown: #5d4037; /* Café profundo que complementa el dorado */
+    --accent-coffee: #c9652f; /* Terracota café para resaltar en navbar */
     
     --font-heading: 'Cormorant Garamond', serif;
     --font-body: 'Inter', sans-serif;
@@ -154,6 +155,17 @@ p {
 }
 
 .nav-links a:hover {
+    color: var(--accent-gold);
+}
+
+.nav-links a.nav-price {
+    color: var(--accent-coffee);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links a.nav-price:hover {
     color: var(--accent-gold);
 }
 

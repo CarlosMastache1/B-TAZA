@@ -3,6 +3,28 @@
 
 {% block title %}Contacto - B-Taza{% endblock %}
 
+{% block extra_head %}
+<style>
+    .facebook-plugin-wrapper {
+        margin-top: 60px;
+        padding: 30px 5vw;
+        text-align: center;
+    }
+    .facebook-plugin-wrapper h3 {
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        color: var(--accent-gold);
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .fb-page {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <section class="contact-hero">
     <!-- Capa oscura para asegurar que el texto sea legible sobre la foto -->
@@ -49,4 +71,30 @@
         </div>
     </div>
 </section>
+
+<!-- Plugin de Facebook -->
+<div class="facebook-plugin-wrapper">
+    <h3>Síguenos en Facebook</h3>
+    <div class="fb-page"
+         data-href="https://www.facebook.com/61594228492815/"
+         data-tabs="timeline"
+          data-width="500"
+         data-height="600"
+         data-small-header="false"
+         data-adapt-container-width="true"
+         data-hide-cover="false"
+         data-show-facepile="true"
+         data-theme="dark">
+        <div class="fb-xfbml-parse-ignore">
+            <blockquote cite="https://www.facebook.com/61594228492815/" class="fb-page">
+                <a href="https://www.facebook.com/61594228492815/">B-Taza</a>
+            </blockquote>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v19.0" nonce="facebook-sdk"></script>
 {% endblock %}
