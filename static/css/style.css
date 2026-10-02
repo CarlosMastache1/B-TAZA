@@ -785,9 +785,11 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: auto; /* Empuja esto al fondo si la tarjeta crece */
-    padding-top: 20px;
+    margin-top: 0 !important;    padding-top: 20px;
     border-top: 1px solid rgba(242, 239, 233, 0.08);
+    position: relative;
+    z-index: 10;
+    position: relative !important;
 }
 
 .product-price {
@@ -1111,5 +1113,115 @@ p {
         flex-direction: column;
         align-items: center;
         gap: 8px;
+    }
+}
+
+
+/* --- SECCIÓN CTA 3D (INICIO) --- */
+.cta-3d-section {
+padding: 100px 5% 0 5% !important; 
+    margin-bottom: 0 !important; /* Destruye cualquier margen inferior oculto */
+    background: linear-gradient(to bottom, #0d0c0b 0%, #161513 100%);
+    border-top: 1px solid rgba(242, 239, 233, 0.05);
+    position: relative; 
+    overflow: hidden;
+}
+
+.cta-3d-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.cta-text-content {
+    flex: 1;
+    max-width: 500px;
+}
+
+.cta-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: #fff;
+    margin: 15px 0 20px 0;
+    line-height: 1.1;
+}
+
+.cta-desc {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: rgba(242, 239, 233, 0.8);
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
+
+.btn-gold-large {
+    display: inline-block;
+    background-color: var(--accent-gold, #c89f5d);
+    color: #000;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-gold-large:hover {
+    background-color: #dcb371;
+    transform: scale(1.05);
+}
+
+/* --- CONTENEDOR DEL MODELO 3D (TAZA) --- */
+.cta-model-wrapper {
+    flex: 1;
+    position: relative;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+model-viewer {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: transparent; /* Mantiene el Dark Mode limpio */
+}
+
+/* Brillo sutil detrás del modelo 3D para darle volumen al fondo oscuro */
+.model-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(200, 159, 93, 0.15) 0%, rgba(0,0,0,0) 70%);
+    z-index: 1;
+    border-radius: 50%;
+}
+
+/* --- RESPONSIVE (CELULARES) --- */
+@media (max-width: 900px) {
+    .cta-3d-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cta-text-content {
+        max-width: 100%;
+    }
+    
+    .cta-title {
+        font-size: 2.5rem;
+    }
+    
+    .cta-model-wrapper {
+        width: 100%;
+        height: 400px;
     }
 }

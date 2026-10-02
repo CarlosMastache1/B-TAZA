@@ -40,6 +40,40 @@
             </div>
         </section>
 
+        <!-- SECCIÓN CTA: DE LA TAZA A TU MESA -->
+<section class="cta-3d-section">
+    <div class="cta-3d-container">
+        
+        <!-- Columna de Texto -->
+        <div class="cta-text-content">
+            <span class="dashboard-kicker">El Destino Final</span>
+            <h2 class="cta-title">Del cultivo a tu paladar</h2>
+            <p class="cta-desc">Cada grano de B-Taza es seleccionado y tostado con precisión matemática para garantizar una extracción perfecta. Descubre el perfil de notas que tenemos preparado para ti.</p>
+            <a href="{% url 'productos' %}" class="btn-gold-large">Ver Presentaciones</a>
+        </div>
+
+        <!-- Columna del Modelo 3D (Taza) -->
+        <div class="cta-model-wrapper">
+            <model-viewer 
+                src="{% static 'models/b-taza.glb' %}" 
+                alt="Modelo 3D de una taza de café B-Taza"
+                auto-rotate 
+                rotation-per-second="30deg"
+                camera-controls 
+                disable-zoom
+                interaction-prompt="none"
+                shadow-intensity="1"
+                environment-image="neutral"
+                exposure="1.2">
+            </model-viewer>
+            <!-- Resplandor dorado decorativo detrás de la taza -->
+            <div class="model-glow"></div>
+        </div>
+
+    </div>
+</section>
+
+
     </div>
 {% endblock %}
 
@@ -55,6 +89,7 @@
     
     <!-- 4. Lenis para Scroll fluido -->
     <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 
     <!-- 5. TU SCRIPT PRINCIPAL (Donde ocurrirá la magia) -->
     <script src="{% static 'js/main.js' %}"></script>
